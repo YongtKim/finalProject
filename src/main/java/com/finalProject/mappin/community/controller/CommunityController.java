@@ -20,6 +20,7 @@ import com.finalProject.mappin.community.model.vo.Community_img;
 import com.finalProject.mappin.community.model.vo.Likes;
 
 @Controller
+@RequestMapping("/community")
 public class CommunityController {
 
 	@Autowired
@@ -30,16 +31,17 @@ public class CommunityController {
 	
 	@RequestMapping("/selectList.co")
 	private ModelAndView selectList(ModelAndView mv){
-		int currentPage = 0;
-		int limit = 0;
+		int currentPage = 1;
+		int limit = 10;
 		List<Community> list = communityService.selectList(currentPage, limit);
-		List<Community_img> imglist = null;
+		/*List<Community_img> imglist = null;
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setImg_path(community_imgService.detail(list.get(i).getCommunity_id()));
-		}
+		}*/
 		mv.addObject("list", list);
-		mv.addObject("imglist", imglist);
-		mv.setViewName("community/cmmunity");
+//		mv.addObject("imglist", imglist);
+		System.out.println(list);
+		mv.setViewName("/community");
 		return mv;
 	}
 	@RequestMapping("/detail.co")

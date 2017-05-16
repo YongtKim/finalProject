@@ -16,7 +16,7 @@ import com.finalProject.mappin.member.model.vo.Member;
 
 
 @Controller
-@SessionAttributes("loginUser")
+@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired
@@ -32,16 +32,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/logincheck.mo")
-	public String loginCheck(Member member, Model model){
+	public String loginCheck(Member member, Model model, HttpSession session){
 		Member loginUser = memberService.loginCheck(member);
-		model.addAttribute("loginUser", loginUser);
-		return "../common/home";
+		session.setAttribute("loginUser", loginUser);
+		return "/common/home";
 	}
 	
 	@RequestMapping("/logout.mo")
 	public String logout(ModelAndView mv, HttpSession session){
 		session.invalidate();
-		return "home";
+		return "/common/home";
 	}
 	
 	@RequestMapping("/insert.mo")
