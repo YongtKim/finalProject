@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- alias 별칭을 주어 이름을 줄여 사용. -->
+	<typeAliases>
+		<typeAlias type="com.finalProject.mappin.member.model.vo.Member" alias="member" />
+<!-- 		<typeAlias type="com.kh.sample.board.model.vo.Board" alias="board" /> -->
+<!-- 		<typeAlias type="com.kh.sample.notice.model.vo.Notice" alias="notice" /> -->
+	</typeAliases>
+		
+<!-- mappers 등록 -->
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+<!-- 		 <mapper resource="mapper/board-mapper.xml" />  -->
+<!-- 		 <mapper resource="mappers/notice-mapper.xml" />  -->
+	</mappers>
+	
+</configuration>

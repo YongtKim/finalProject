@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="membermapper">
+
+	<resultMap type="member" id="loginUser">
+		<id property="member_id" column="member_id" />
+		<result property="member_pwd" column="member_pwd" />
+		<result property="member_name" column="member_name" />
+		<result property="email" column="email" />
+		
+	</resultMap>
+	<select id="logincheck" parameterType="member" resultMap="loginUser">
+		select * from member
+		<where>
+			email = #{email} and member_pwd = #{member_pwd}
+		</where>
+	</select>
+
+	<resultMap type="member" id="sMember">
+		<id property="email" column="email" />
+		<result property="member_pwd" column="member_pwd" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="gender" column="gender" />
+		<result property="birth_date" column="birth_date" />
+		<result property="facebook" column="facebook" />
+		<result property="insta" column="insta" />
+		<result property="account_name" column="account_name" />
+		<result property="account_num" column="account_num" />
+	</resultMap>
+	<select id="selectMember" parameterType="String" resultMap="sMember">
+		select * from member
+		<where>
+			member_id = #{member_id}
+		</where>
+	</select>
+
+	<resultMap type="member" id="nameSearch">
+		<id property="email" column="email" />
+		<result property="member_pwd" column="member_pwd" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="gender" column="gender" />
+		<result property="birth_date" column="birth_date" />
+		<result property="facebook" column="facebook" />
+		<result property="insta" column="insta" />
+		<result property="account_name" column="account_name" />
+		<result property="account_num" column="account_num" />
+	</resultMap>
+	<select id="nSearch" parameterType="String" resultMap="nameSearch">
+		select * from member
+		<where>
+			member_name = #{member_name}
+		</where>
+	</select>
+
+	<resultMap type="member" id="selectall">
+		<id property="email" column="email" />
+		<result property="member_pwd" column="member_pwd" />
+		<result property="member_name" column="member_name" />
+		<result property="member_id" column="member_id" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="gender" column="gender" />
+		<result property="birth_date" column="birth_date" />
+		<result property="facebook" column="facebook" />
+		<result property="insta" column="insta" />
+		<result property="account_name" column="account_name" />
+		<result property="account_num" column="account_num" />
+	</resultMap>
+	<select id="selectAll" resultMap="selectall">
+		select * from member
+	</select>
+
+	<insert id="minsert" parameterType="member">
+		insert into member values
+		(#{email}, #{member_pwd}, #{member_name}, #{member_id},#{gender},
+		#{birth_date},
+		#{profile_img}, #{phone}, #{address}, #{facebook}, #{insta}, #{account_name}, #{account_num})
+	</insert>
+
+	<delete id="mdelete" parameterType="String">
+		delete from member
+		<where>
+			email = #{email} and member_pwd = #{member_pwd}
+		</where>
+	</delete>
+
+	<update id="mupdate" parameterType="member">
+		update member
+		<trim prefix="set" prefixOverrides=",">
+			<if test="member_pwd != null">member_pwd = #{member_pwd},</if>
+			<if test="gender != null">gender= #{gender},</if>
+			<if test="profile_img != null">profile_img = #{profile_img},</if>
+			<if test="phone != null">phone = #{phone},</if>
+			<if test="address != null">address = #{address},</if>
+			<if test="facebook != null">facebook = #{facebook},</if>
+			<if test="insta != null">insta = #{insta}</if>
+			<if test="account_name != null">account_name = #{account_name},</if>
+			<if test="account_num != null">account_num = #{account_num}</if>
+		</trim>
+		<where>
+			member_id = #{member_id}
+		</where>
+	</update>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="membermapper">
+
+	<resultMap type="member" id="loginUser">
+		<id property="userid" column="USERID"/>
+		<result property="userpwd" column="USERPWD" />
+		<result property="username" column="USERNAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="hobby" column="HOBBY" />
+	</resultMap>
+	<select id="logincheck" parameterType="member" resultMap="loginUser">
+		select * from member
+		<where>
+			userid = #{userid} and userpwd = #{userpwd}
+		</where>
+	</select>
+	
+	<resultMap type="member" id="sMember">
+		<id property="userId" column="USERID"/>
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="hobby" column="HOBBY" />
+	</resultMap>
+	<select id="selectMember" parameterType="String" resultMap="sMember">
+		select * from member 
+		<where>
+			userid = #{userid}
+		</where>
+	</select>
+	
+	<resultMap type="member" id="nameSearch">
+		<id property="userId" column="USERID"/>
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="hobby" column="HOBBY" />
+	</resultMap>
+	<select id="nameSearch" parameterType="String" resultMap="nameSearch">
+		select * from member 
+		<where>
+			username = #{userName}
+		</where>
+	</select>
+	
+	<resultMap type="member" id="selectall">
+		<id property="userId" column="USERID"/>
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="hobby" column="HOBBY" />
+	</resultMap>
+	<select id="selectall" resultMap="selectall">
+		select * from member
+	</select>
+	
+	<insert id="minsert" parameterType="member">
+		insert into member values (#{userId}, #{userPwd}, #{userName}, #{email},#{gender}, #{phone}, #{address}, #{hobby}, #{birth})
+	</insert>
+	
+	<delete id="mdelete" parameterType="String">
+		delete from member 
+		<where>
+			userid = #{userId}
+		</where>
+	</delete>
+	
+	<update id="mupdate" parameterType="member">
+		update member
+		<trim prefix="set" prefixOverrides=",">
+			<if test="userPwd != null">userpwd = #{userPwd},</if>
+			<if test="email != null">email = #{email},</if>
+			<if test="gender != null">gender= #{gender},</if>
+			<if test="phone != null">phone = #{phone},</if>
+			<if test="address != null">address = #{address},</if>
+			<if test="birth != null">birth = #{birth},</if>
+			<if test="hobby != null">hobby = #{hobby}</if>
+			<if test="birth != null">birth = #{birth},</if>
+		</trim>
+		<where>
+			userid = #{userId}
+		</where>
+	</update>
+</mapper>
