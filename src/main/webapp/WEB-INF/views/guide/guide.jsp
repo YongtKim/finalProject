@@ -4,8 +4,8 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="/test/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/test/css/style.css" type="text/css">
+<link rel="stylesheet" href="/mappin/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/mappin/css/style.css" type="text/css">
 <style type="text/css">
 	
 </style>
@@ -22,7 +22,7 @@
 		<a class="btn btn-mappin" href="#">
 			내글 보기
 		</a>
-		<a class="btn btn-mappin" href="/test/views/guide/guideInsert.jsp">
+		<a class="btn btn-mappin" href="/mappin/menu/guideInsertForm.ao">
 			<span class="glyphicon glyphicon-pencil"></span>가이드 등록
 		</a>
 	</div>

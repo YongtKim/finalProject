@@ -13,12 +13,17 @@ public class MarkerServiceImp implements MarkerService{
 	
 	@Autowired
 	MarkerDao markerDao;
-
+	
 	@Override
-	public List<Marker> selectList() {
-		return markerDao.selectList();
+	public List<Marker> selectList(int page, int contentType) {
+		
+		return markerDao.selectList(page,contentType);
 	}
-
+	@Override
+	public List<Marker> selectList(int page, int contentType, String keyword) {
+		return null;
+	}
+	
 	@Override
 	public Marker detail(int content_id, int content_type) {
 		return markerDao.detail(content_id, content_type);
@@ -33,6 +38,15 @@ public class MarkerServiceImp implements MarkerService{
 	public int delete(Marker marker) {
 		return markerDao.delete(marker);
 	}
+
+	@Override
+	public int getpage(int contentType) {
+		return markerDao.getpage(contentType);
+	}
+
+	
+
+	
 
 
 } 

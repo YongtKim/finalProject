@@ -43,6 +43,10 @@ public class HomeController {
 	public String guide(Locale locale, Model model) {
 		return "guide/guide";
 	}
+	@RequestMapping("/guideInsertForm.ao")
+	public String guideInsertForm(Locale locale, Model model) {
+		return "guide/guideInsert";
+	}
 	@RequestMapping("/community.ao")
 	public String community(Locale locale, Model model) {
 		return "community/community";

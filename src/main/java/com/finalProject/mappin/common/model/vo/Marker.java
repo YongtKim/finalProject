@@ -4,107 +4,107 @@ import java.io.Serializable;
 
 public class Marker implements Serializable{
 
-	private int MAP_X;
-	private int MAP_Y;
-	private String MARKER_NAME;
-	private int CONTENT_ID;
-	private int CONTENT_TYPE;
-	private String MEMBER_ID;
-	private String MARKER_OVERVIEW;
-	private String MARKER_ADDRESS;
-	private String MARKER_URL;
-	private String MARKER_TEL;
-	private String MARKER_IMG;
+	private Double map_x;
+	private Double map_y;
+	private String marker_name;
+	private int content_id;
+	private int content_type;
+	private String member_id;
+	private String member_overview;
+	private String marker_address;
+	private String marker_url;
+	private String marker_tel;
+	private String marker_img;
 	public Marker() {
 		super();
 	}
-	public Marker(int mAP_X, int mAP_Y, String mARKER_NAME, int cONTENT_ID, int cONTENT_TYPE, String mEMBER_ID,
+	public Marker(Double mAP_X, Double mAP_Y, String mARKER_NAME, int cONTENT_ID, int cONTENT_TYPE, String mEMBER_ID,
 			String mARKER_OVERVIEW, String mARKER_ADDRESS, String mARKER_URL, String mARKER_TEL, String mARKER_IMG) {
 		super();
-		MAP_X = mAP_X;
-		MAP_Y = mAP_Y;
-		MARKER_NAME = mARKER_NAME;
-		CONTENT_ID = cONTENT_ID;
-		CONTENT_TYPE = cONTENT_TYPE;
-		MEMBER_ID = mEMBER_ID;
-		MARKER_OVERVIEW = mARKER_OVERVIEW;
-		MARKER_ADDRESS = mARKER_ADDRESS;
-		MARKER_URL = mARKER_URL;
-		MARKER_TEL = mARKER_TEL;
-		MARKER_IMG = mARKER_IMG;
+		map_x = mAP_X;
+		map_y = mAP_Y;
+		marker_name = mARKER_NAME;
+		content_id = cONTENT_ID;
+		content_type = cONTENT_TYPE;
+		member_id = mEMBER_ID;
+		member_overview = mARKER_OVERVIEW;
+		marker_address = mARKER_ADDRESS;
+		marker_url = mARKER_URL;
+		marker_tel = mARKER_TEL;
+		marker_img = mARKER_IMG;
 	}
-	public int getMAP_X() {
-		return MAP_X;
+	public Double getMAP_X() {
+		return map_x;
 	}
-	public void setMAP_X(int mAP_X) {
-		MAP_X = mAP_X;
+	public void setMAP_X(Double mAP_X) {
+		map_x = mAP_X;
 	}
-	public int getMAP_Y() {
-		return MAP_Y;
+	public Double getMAP_Y() {
+		return map_y;
 	}
-	public void setMAP_Y(int mAP_Y) {
-		MAP_Y = mAP_Y;
+	public void setMAP_Y(Double mAP_Y) {
+		map_y = mAP_Y;
 	}
 	public String getMARKER_NAME() {
-		return MARKER_NAME;
+		return marker_name;
 	}
 	public void setMARKER_NAME(String mARKER_NAME) {
-		MARKER_NAME = mARKER_NAME;
+		marker_name = mARKER_NAME;
 	}
 	public int getCONTENT_ID() {
-		return CONTENT_ID;
+		return content_id;
 	}
 	public void setCONTENT_ID(int cONTENT_ID) {
-		CONTENT_ID = cONTENT_ID;
+		content_id = cONTENT_ID;
 	}
 	public int getCONTENT_TYPE() {
-		return CONTENT_TYPE;
+		return content_type;
 	}
 	public void setCONTENT_TYPE(int cONTENT_TYPE) {
-		CONTENT_TYPE = cONTENT_TYPE;
+		content_type = cONTENT_TYPE;
 	}
 	public String getMEMBER_ID() {
-		return MEMBER_ID;
+		return member_id;
 	}
 	public void setMEMBER_ID(String mEMBER_ID) {
-		MEMBER_ID = mEMBER_ID;
+		member_id = mEMBER_ID;
 	}
 	public String getMARKER_OVERVIEW() {
-		return MARKER_OVERVIEW;
+		return member_overview;
 	}
 	public void setMARKER_OVERVIEW(String mARKER_OVERVIEW) {
-		MARKER_OVERVIEW = mARKER_OVERVIEW;
+		member_overview = mARKER_OVERVIEW;
 	}
 	public String getMARKER_ADDRESS() {
-		return MARKER_ADDRESS;
+		return marker_address;
 	}
 	public void setMARKER_ADDRESS(String mARKER_ADDRESS) {
-		MARKER_ADDRESS = mARKER_ADDRESS;
+		marker_address = mARKER_ADDRESS;
 	}
 	public String getMARKER_URL() {
-		return MARKER_URL;
+		return marker_url;
 	}
 	public void setMARKER_URL(String mARKER_URL) {
-		MARKER_URL = mARKER_URL;
+		marker_url = mARKER_URL;
 	}
 	public String getMARKER_TEL() {
-		return MARKER_TEL;
+		return marker_tel;
 	}
 	public void setMARKER_TEL(String mARKER_TEL) {
-		MARKER_TEL = mARKER_TEL;
+		marker_tel = mARKER_TEL;
 	}
 	public String getMARKER_IMG() {
-		return MARKER_IMG;
+		return marker_img;
 	}
 	public void setMARKER_IMG(String mARKER_IMG) {
-		MARKER_IMG = mARKER_IMG;
+		marker_img = mARKER_IMG;
 	}
 	@Override
 	public String toString() {
-		return "Marker [MAP_X=" + MAP_X + ", MAP_Y=" + MAP_Y + ", MARKER_NAME=" + MARKER_NAME + ", CONTENT_ID="
-				+ CONTENT_ID + ", CONTENT_TYPE=" + CONTENT_TYPE + ", MEMBER_ID=" + MEMBER_ID + ", MARKER_OVERVIEW="
-				+ MARKER_OVERVIEW + ", MARKER_ADDRESS=" + MARKER_ADDRESS + ", MARKER_URL=" + MARKER_URL
-				+ ", MARKER_TEL=" + MARKER_TEL + ", MARKER_IMG=" + MARKER_IMG + "]";
+		return "Marker [MAP_X=" + map_x + ", MAP_Y=" + map_y + ", MARKER_NAME=" + marker_name + ", CONTENT_ID="
+				+ content_id + ", CONTENT_TYPE=" + content_type + ", MEMBER_ID=" + member_id + ", MARKER_OVERVIEW="
+				+ member_overview + ", MARKER_ADDRESS=" + marker_address + ", MARKER_URL=" + marker_url
+				+ ", MARKER_TEL=" + marker_tel + ", MARKER_IMG=" + marker_img + "]";
 	}
 	
 
