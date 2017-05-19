@@ -15,6 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.finalProject.mappin.common.model.vo.Marker;
+import com.oracle.jrockit.jfr.ContentType;
 
 
 
@@ -185,15 +186,15 @@ public class MarkerDao {
 				if(nNode.getNodeType() == Node.ELEMENT_NODE){
 					Element eElement = (Element) nNode;
 					mk.setMARKER_ADDRESS(getTagValue("addr1", eElement));
-					if(getTagValue("firstimage",eElement)==null){
-					}else{
+					if(getTagValue("firstimage",eElement)!=null){
 						mk.setMARKER_IMG(getTagValue("firstimage", eElement));
 					}	
-					if(getTagValue("mapx", eElement)==null){
-						
-					}else{
+					if(getTagValue("mapx", eElement)!=null){
 						mk.setMAP_X(Double.valueOf(getTagValue("mapx", eElement)));
 						mk.setMAP_Y(Double.valueOf(getTagValue("mapy", eElement)));
+					}
+					if(getTagValue("tel",eElement)!=null){
+						mk.setMARKER_TEL(getTagValue("tel",eElement));
 					}
 					mk.setMARKER_NAME(getTagValue("title", eElement));
 					mk.setCONTENT_ID(Integer.parseInt(getTagValue("contentid", eElement)));
@@ -230,9 +231,57 @@ public class MarkerDao {
 	}
 	return pageList;	
 	}
-
-	public Marker detail(int content_id, int content_type) {
+	
+	public ArrayList<String> imgDetail(int contentId,int contentType){
+		String url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=EtQZrT3XWKN7DoWis1UglcjHhWzqoZPFUDlrOtmsdW%2FtWbWJM8hvCdoomDs4x0UlEePVSxkQ8N1xjlPeuHgyPA%3D%3D&contentTypeId="+contentType+"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&contentId="+contentId+"&imageYN=Y ";
 		return null;
+	}
+	
+	public ArrayList<String> introDetail(int contentId,int contentType){
+		String url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=EtQZrT3XWKN7DoWis1UglcjHhWzqoZPFUDlrOtmsdW%2FtWbWJM8hvCdoomDs4x0UlEePVSxkQ8N1xjlPeuHgyPA%3D%3D&contentTypeId="+contentType+"&contentId="+contentId+"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y";
+		return null;
+	}
+	
+	//관광지 상세정보 (공통)
+	public Marker commonDetail(int contentId,int contentType) {
+		Marker mk= new Marker();
+		try{
+			// parsing할 url 지정(API 키 포함해서)
+			String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=EtQZrT3XWKN7DoWis1UglcjHhWzqoZPFUDlrOtmsdW%2FtWbWJM8hvCdoomDs4x0UlEePVSxkQ8N1xjlPeuHgyPA%3D%3D&contentTypeId="+contentType+"&contentId="+contentId+"&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y";
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+			
+			// root tag 
+			doc.getDocumentElement().normalize();
+			// 파싱할 tag
+			NodeList nList = doc.getElementsByTagName("item");
+			
+			for(int temp = 0; temp < nList.getLength(); temp++){
+				Node nNode = nList.item(temp);
+				if(nNode.getNodeType() == Node.ELEMENT_NODE){
+					Element eElement = (Element) nNode;
+					mk.setMARKER_ADDRESS(getTagValue("addr1", eElement));
+					if(getTagValue("firstimage",eElement)!=null){
+						mk.setMARKER_IMG(getTagValue("firstimage", eElement));
+					}	
+					if(getTagValue("mapx", eElement)!=null){
+						mk.setMAP_X(Double.valueOf(getTagValue("mapx", eElement)));
+						mk.setMAP_Y(Double.valueOf(getTagValue("mapy", eElement)));
+					}
+					if(getTagValue("tel", eElement)!=null){
+						mk.setMARKER_TEL(getTagValue("tel", eElement));
+					}
+					mk.setMARKER_NAME(getTagValue("title", eElement));
+					mk.setMARKER_OVERVIEW(getTagValue("overview",eElement));
+					mk.setCONTENT_ID(Integer.parseInt(getTagValue("contentid", eElement)));
+					mk.setCONTENT_TYPE(Integer.parseInt(getTagValue("contenttypeid", eElement)));
+						}//if end
+					}	// for end
+	} catch (Exception e){	
+		e.printStackTrace();
+	}	// try~catch end
+		return mk;
 	}
 
 	public int insert(Marker marker) {

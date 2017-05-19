@@ -13,8 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <jsp:include page="../common/menuBar.jsp" />
-   
    <div class="container">
       <h2 class="text-center">가이드 등록</h2>
       <div class="separator_auto"></div>
@@ -52,6 +52,7 @@
                 <tr>
                    <td>패키지 명 :</td>
                    <td colspan="2"><input type="text" class="form-control"></td>
+
                 </tr>
                  <tr>
                     <td colspan="3">
@@ -70,7 +71,6 @@
             <div></div>
          </div>
       </div>
-   
       <br/>
       <br/>
       <br/>
@@ -125,7 +125,8 @@ var addwindow=null;
 var markers=[];
 var apiMarkers=[];
 var apiWindows=[];
-
+var contentIds=[];
+var contentTypes=[];
 //지도 안에서 마우스 우클릭 이벤트
 daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
    //중복클리기 이전 인포윈도우 삭제
@@ -309,9 +310,11 @@ $(function(){
                         +'</div>'
                         +'<div class="jibun">'
                         +'<span>'+jsonArr.list[i].address+'</span>'
+                        +'<a href="#" id="detailMarker_'+i+'" hidden="true">자세히 보기</a>'
                         +'</div>'
                         +'</li>'
                $('#placesList').html($('#placesList').html()+content);
+                        $('#detailMarker_'+i).attr('hidden','false');
                     var infowindow= new daum.maps.InfoWindow({
                        map:map,
                        removable:true,
@@ -408,6 +411,8 @@ $(function(){
 				var jsonArr = JSON.parse(jsonData);
 				for(i in jsonArr.list){
 					var num=Number(i)+Number(1);
+					var contentId=jsonArr.list[i].contentid;
+					var contentType=jsonArr.list[i].contenttype;
 				    var el = document.createElement('li');
 					var content ='<li class="item" id="item_'+num+'">'
 								+'<span class="markerbg marker_'+num+'"></span>'
@@ -421,13 +426,31 @@ $(function(){
 								+'<div class="jibun">'
 								+'<span>'+jsonArr.list[i].address+'</span>'
 								+'</div>'
-								+'</li>'
+								+'</li>';
+								
 					$('#placesList').html($('#placesList').html()+content);
+								markerContent='<li class="item" id="item_'+num+'">'
+								+'<span class="markerbg marker_'+num+'"></span>'
+								+'<div class="info">';
+								if(jsonArr.list[i].img!=null){
+									markerContent+='<img alt="" src="'+jsonArr.list[i].img+'" style="width:70px;height:70px"/>';
+								}
+								
+								markerContent+='<h5>'+decodeURI(jsonArr.list[i].title)+'</h5>'
+								+'</div>'
+								+'<div class="jibun">'
+								+'<span>'+jsonArr.list[i].address+'</span><br>'
+								+'<a href="#" id="detailMarker_'+i+'"style="visibilty:hidden">자세히 보기</a>';
+								+'</div>'
+								+'</li>';
 						  var infowindow= new daum.maps.InfoWindow({
 					        map:map,
 					        removable:true,
-					        content:content
+					        content:markerContent
 					      });
+						  $('#detailMarker_'+i).click(function(){
+							  commonDetail(contentId,contentType);
+						  });
 						  apiWindows.push(infowindow);
 						var apimarker=addmarker(map,new daum.maps.LatLng(jsonArr.list[i].lng,jsonArr.list[i].lat),num);
 						changeView(map,'제주시');
@@ -445,7 +468,18 @@ $(function(){
 		});
 	}
    
-   
+   function commonDetail(contentId,contentType){
+	   $.ajax({
+		   url:'/mappin/marker/commonDetail.mark',
+			type:'get',
+			datatype:'json',
+			data:{"contentid":contentId,
+				  "contenttype":contentType},
+			success:function(data){
+				console.log($(data));
+			}//success end
+	   });//ajax end
+   }
    
    function addCilckEvent(map,apimarker,infowindow,apiWindows){
       daum.maps.event.addListener(apimarker, 'click', function() {
@@ -697,6 +731,10 @@ $(function(){
 	    fragment.appendChild(endbtn);
 	    paginationEl.appendChild(fragment);
 	}
+   	
+   	
+   
+   
 </script>
 </body>
 </html>

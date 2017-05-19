@@ -1,5 +1,6 @@
 package com.finalProject.mappin.common.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,6 @@ public class MarkerServiceImp implements MarkerService{
 	public List<Marker> selectList(int page, int contentType, String keyword) {
 		return markerDao.selectList(page, contentType, keyword);
 	}
-	
-	@Override
-	public Marker detail(int content_id, int content_type) {
-		return markerDao.detail(content_id, content_type);
-	}
 
 	@Override
 	public int insert(Marker marker) {
@@ -57,6 +53,17 @@ public class MarkerServiceImp implements MarkerService{
 	@Override
 	public int getpage(String keyword) {
 		return markerDao.getpage(keyword);
+	}
+
+	@Override
+	public Marker commonDetail(int contentId, int contentType) {
+		return markerDao.commonDetail(contentId, contentType);
+	}
+
+	@Override
+	public ArrayList<String> introDetail(int contentId, int contentType) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

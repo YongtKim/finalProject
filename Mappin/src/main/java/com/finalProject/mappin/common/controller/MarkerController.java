@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalProject.mappin.common.model.service.MarkerService;
+import com.finalProject.mappin.common.model.service.MarkerServiceImp;
 import com.finalProject.mappin.common.model.vo.Marker;
 
 @Controller
@@ -119,9 +120,24 @@ public class MarkerController {
 		out.close();
 	}
 	
-	@RequestMapping("/detail.mark")
-	public Marker detail(int content_id, int content_type){
-		return markerService.detail(content_id, content_type);
+	@RequestMapping("/commonDetail.mark")
+	public void commonDetail(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		int contentId=Integer.parseInt(request.getParameter("contentid"));
+		int contentType=Integer.parseInt(request.getParameter("contenttype"));
+		Marker marker=markerService.commonDetail(contentId,contentType);
+		JSONObject js =new JSONObject();
+		js.put("title", URLEncoder.encode(marker.getMARKER_NAME(),"UTF-8"));
+		js.put("img", marker.getMARKER_IMG());
+		js.put("lat",marker.getMAP_X());
+		js.put("lng", marker.getMAP_Y());
+		js.put("address", URLEncoder.encode(marker.getMARKER_ADDRESS(),"UTF-8"));
+		js.put("contentid", marker.getCONTENT_ID());
+		js.put("contenttype", marker.getCONTENT_TYPE());
+		response.setContentType("application/json");
+		PrintWriter out= response.getWriter();
+		out.print(js.toJSONString());
+		out.flush();
+		out.close();
 	}
 	
 	@RequestMapping("/insert.mark")
